@@ -1,5 +1,7 @@
 import requests
 import json
+import time
+from tqdm import tqdm
 
 URL = 'https://en.wikipedia.org/wiki/'
 
@@ -26,7 +28,8 @@ class CountryInfoFromWikipedia:
         return country
 
 with open('country_link.json', 'w+', encoding='utf-8') as file:
-    for country in CountryInfoFromWikipedia():
+    for country in tqdm(CountryInfoFromWikipedia()):
+        time.sleep(0.1)
         wiki_link = {country: URL + country.replace(" ", "_")}
         json.dump(wiki_link, file, indent=2, ensure_ascii=False)
 
